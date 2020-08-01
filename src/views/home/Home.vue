@@ -144,14 +144,24 @@
       }
     },
     created() {
-      getHomeMultidata().then(res => {
-        console.log(res);
-        this.banners = res.data.banner.list;
-        this.recommends = res.data.recommend.list
-      })
-      getHomeGoods('pop',1).then(res => {
-        console.log(res);
-      })
+      this.getHomeMultidata();
+      this.getHomeGoods('pop');
+      this.getHomeGoods('new');
+      this.getHomeGoods('sell');
+    },
+    methods: {
+      getHomeMultidata() {
+        getHomeMultidata().then(res => {
+          console.log(res);
+          this.banners = res.data.banner.list;
+          this.recommends = res.data.recommend.list
+        })
+      },
+      getHomeGoods(type) {
+        getHomeGoods(type,1).then(res => {
+          console.log(res);
+        })
+      }
     }
   }
 </script>
